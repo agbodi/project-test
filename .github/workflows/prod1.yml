@@ -3,7 +3,6 @@ name: My deploy workflow
 on:
   workflow_run:
     workflows: My tests workflow # Reuse the name of your tests workflow
-    branches: [ hotfix/1.2 ]
     types: completed
 
 #jobs:

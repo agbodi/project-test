@@ -2,8 +2,6 @@ name: My tests workflow
 
 on:
   push:
-    branches:
-      - [ 'hotfix/1.2' ]
   pull_request: {}
 
 jobs:
