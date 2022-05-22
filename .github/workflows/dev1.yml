@@ -8,9 +8,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-       - run: echo "First workflow was a success"
+       - run: echos "First workflow was a success"
   prod:
     runs-on: ubuntu-latest
-    needs: [test]
+    #needs: [test]
     steps:
        - run: echo "Second workflow was a success"
