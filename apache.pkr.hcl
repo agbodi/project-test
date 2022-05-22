@@ -16,7 +16,7 @@ variable "public_subnet_id" {
 }
 
 locals {
-  release_id = formatDateTime(utcNow(),'MM-dd-yyyy')
+  release_id = formatDateTime(utcNow(),"MM-dd-yyyy")
   #release_id = formatdate("YYYYMMDD", timestamp())
 }
 
