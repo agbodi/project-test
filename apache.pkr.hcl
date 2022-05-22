@@ -16,7 +16,8 @@ variable "public_subnet_id" {
 }
 
 locals {
-  release_id = formatdate("YYYYMMDD", timestamp())
+  release_id = formatDateTime(utcNow(),'MM-dd-yyyy')
+  #release_id = formatdate("YYYYMMDD", timestamp())
 }
 
 # source blocks are generated from your builders; a source can be referenced in
