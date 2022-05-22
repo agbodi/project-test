@@ -125,11 +125,11 @@ build {
     destination = "/tmp/user_management.sql"
   }
     provisioner "shell" {
-    inline = [ "mariadb < /tmp/mariadb" ]
+    inline = [ "sudo mariadb < /tmp/mariadb" ]
   }
 
    provisioner "shell" {
-    inline = [ "mariadb < /tmp/user_management.sql" ]
+    inline = [ "sudo mariadb < /tmp/user_management.sql" ]
   }
 
   provisioner "shell" {
