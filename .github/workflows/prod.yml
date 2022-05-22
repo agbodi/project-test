@@ -1,6 +1,6 @@
 name: "Terraform Deployment"
 on:
-  workflow_dispatch:
+#  workflow_dispatch:
   workflow_run:
     workflows: [AWS AMI using Packer Config]
     branches: [main]
@@ -12,11 +12,11 @@ jobs:
     name: Test Run
     if: github.ref != 'refs/heads/main' #|| github.ref != 'refs/heads/destroy'
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     env:
          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
          AWS_DEFAULT_REGION: us-east-1
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v2
       - uses: hashicorp/setup-terraform@v1
@@ -35,11 +35,11 @@ jobs:
     name: Prod Run
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/destroy'
     runs-on: ubuntu-18.04
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     env:
          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
          AWS_DEFAULT_REGION: us-east-1
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v2
       - uses: hashicorp/setup-terraform@v1
