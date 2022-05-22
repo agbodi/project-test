@@ -108,7 +108,7 @@ build {
   }
    provisioner "file" {
     source = "files/application.conf"
-    destination = "/etc/nginx/conf.d/app.conf"
+    destination = "/tmp/app.conf"
   }
 
   provisioner "shell" {
