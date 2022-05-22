@@ -80,13 +80,12 @@ build {
  # }
 
   "provisioners": [
-
-  {
-    "type": "shell",
-    "execute_command":"echo 'packer' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
-    "scripts": ["./setup.sh"]
-    "expect_disconnect": "true"
-  },
+ # {
+ #   "type": "shell",
+ #   "execute_command": "echo 'packer' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
+ #   "scripts": ["./setup.sh"]
+ #   "expect_disconnect": "true"
+ # },
   {
     "type": "file",
     "source": "files/php",
