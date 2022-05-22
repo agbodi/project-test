@@ -1,0 +1,11 @@
+name: My tests workflow
+
+on:
+  push:
+    branches:
+      - master
+  pull_request: {}
+
+jobs:
+  test:
+
