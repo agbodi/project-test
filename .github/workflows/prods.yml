@@ -7,7 +7,7 @@
 
  jobs:
    prod:
-     if: ${{ github.event.workflow_run.conclusion == 'success' }}
+     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
      steps:
        - run: echo "First workflow was a success"
 
