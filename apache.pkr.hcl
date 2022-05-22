@@ -84,6 +84,10 @@ build {
 
   provisioner "file" {
     source = "files/php"
+    destination = "/tmp/app"
+  }
+  provisioner "shell" {
+    source = "/tmp/php"
     destination = "/var/www/app"
   }
   provisioner "file" {
