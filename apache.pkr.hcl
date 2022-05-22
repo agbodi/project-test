@@ -71,7 +71,7 @@ source_ami_filter {
 
 # a build block invokes sources and runs provisioning steps on them.
 build {
-  sources: ["source.amazon-ebs.firstrun"]
+ "sources": ["source.amazon-ebs.firstrun"]
 
  # provisioner "shell" {
  #   execute_command   = "echo 'packer' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
