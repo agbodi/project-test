@@ -1,0 +1,13 @@
+ 
+ name: Production-Run
+ on:
+   workflow_run:
+     workflows: ["unit-tests"]
+     types: [completed] #requested
+
+ jobs:
+   prod:
+     if: ${{ github.event.workflow_run.conclusion == 'success' }}
+     steps:
+       - run: echo "First workflow was a success"
+

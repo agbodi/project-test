@@ -1,0 +1,5 @@
+DROP USER IF EXISTS user_manager;
+DROP DATABASE IF EXISTS user_inventory;
+CREATE DATABASE user_inventory;
+CREATE USER user_manager IDENTIFIED BY 'Qwerty123';
+GRANT ALL PRIVILEGES ON user_inventory.* TO user_manager;
