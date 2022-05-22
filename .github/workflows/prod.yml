@@ -2,7 +2,7 @@ name: "Terraform Deployment"
 on:
 #  workflow_dispatch:
   workflow_run:
-    workflows: [AWS AMI using Packer Config]
+    workflows: ["AWS AMI using Packer Config"]
     branches: [main]
     types:
       - completed
