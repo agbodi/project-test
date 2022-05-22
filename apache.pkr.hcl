@@ -7,7 +7,7 @@ variable "region" {
 
 variable "ami_id" {
   type    = string
-  default = "ami-0022f774911c1d690"
+  default = "ami-039c735a27bd2d204"
 }
 
 variable "public_subnet_id" {
