@@ -3,7 +3,7 @@ name: My tests workflow
 on:
   push:
     branches:
-      - *
+      - "*"
   pull_request: {}
 
 jobs:
