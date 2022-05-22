@@ -132,12 +132,10 @@ build {
     inline = [ "sudo mariadb user_inventory < /tmp/user_management.sql" ]
   }
 
-#  provisioner "shell" {
-#    inline = [ "sudo chown -R root.nginx /var/lib/php  /var/www/app" ]
-#  }
-# provisioner "shell" {
-#    inline = [ "sudo systemctl enable php-frm && sudo systemctl start php-frm && sudo systemctl enable nginx && sudo systemctl start nginx" ]
-#  } 
+  provisioner "shell" {
+    inline = [ "sudo chown -R root.nginx /var/lib/php  /var/www/app" ]
+  }
+ provisioner "shell" {
+    inline = [ "sudo systemctl enable php-fpm && sudo systemctl start php-fpm && sudo systemctl enable nginx && sudo systemctl start nginx" ]
+  } 
 }
-#
-#
