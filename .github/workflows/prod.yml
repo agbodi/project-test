@@ -2,7 +2,7 @@ name: "Terraform Deployment"
 on:
   # Manual trigger
   workflow_run:
-    workflows: ["AWS AMI using Packer Config"]
+    workflows: [AWS AMI using Packer Config]
     branches: [main]
     types: 
       - completed
@@ -16,6 +16,7 @@ defaults:
   run:
     shell: bash
 jobs:
+  on-success:
   terraform_test:
     name: Test Run
     if: github.ref != 'refs/heads/main' #|| github.ref != 'refs/heads/destroy'
@@ -41,6 +42,7 @@ jobs:
         run: |
           terraform plan -input=false -var-file=test/terraform.tfvars -no-color
   terraform_prod: 
+   on-success:
     name: Prod Run
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/destroy'
     #name:   ${{matrix.runner}} - ${{ matrix.environment }}
