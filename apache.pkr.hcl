@@ -5,10 +5,10 @@ variable "region" {
   default = "us-east-1"
 }
 
-variable "ami_id" {
-  type    = string
-  default = "ami-039c735a27bd2d204"
-}
+#variable "ami_id" {
+#  type    = string
+#  default = "ami-039c735a27bd2d204"
+#}
 
 variable "public_subnet_id" {
   type    = string
@@ -36,8 +36,8 @@ source "amazon-ebs" "firstrun" {
 
 source_ami_filter {
     filters = {
-      image-id = "${var.ami_id}"
-      #name                = "al2022-ami-*"
+      #image-id = "${var.ami_id}"
+      name                = "jango-base-*"
       root-device-type    = "ebs"
       virtualization-type = "hvm"
     }
