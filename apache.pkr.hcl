@@ -19,9 +19,6 @@ locals {
   release_id = formatdate("DDMMYYYYhhmm", timestamp())
 }
 
-# source blocks are generated from your builders; a source can be referenced in
-# build blocks. A build block runs provisioners and post-processors on a
-# source.
 source "amazon-ebs" "firstrun" {
   ami_name                              = join("-", ["jango-app", local.release_id])
   instance_type                         = "t2.micro"
@@ -71,70 +68,59 @@ source_ami_filter {
 
 # a build block invokes sources and runs provisioning steps on them.
 build {
- "sources": ["source.amazon-ebs.firstrun"]
-
+ sources = ["source.amazon-ebs.firstrun"]
  # provisioner "shell" {
  #   execute_command   = "echo 'packer' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
  #   script            = "./setup.sh"
  #   expect_disconnect = true
  # }
 
-  "provisioners": [
-  {
-   "type": "shell",
-   "execute_command": "echo 'packer' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
-   "scripts": ["./setup.sh"]
-   "expect_disconnect": "true"
-  },
- {
-    "type": "file",
-    "source": "files/php",
-    "destination": "/var/www/app/"
-  },
-  {
-    "type": "file",
-    "source": "files/php.conf",
-    "destination": "/etc/php-fpm.d/www.conf"
-  },
-  {
-    "type": "file",
-    "source": "files/nginx.conf",
-    "destination": "/etc/nginx/nginx.conf"
-  },
+  provisioner "shell" {
+  
+   execute_command  = "echo 'packer' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
+   scripts =  ["./setup.sh"]
+   expect_disconnect = "true"
+  }
 
-  {
-    "type": "file",
-    "source": "files/application.conf",
-    "destination": "/etc/nginx/conf.d/app.conf"
-  },
+  provisioner "file" {
+    source = "files/php"
+    destination = "/var/www/app/"
+  }
+  provisioner "file" {
+    source = "files/php.conf"
+    destination = "/etc/php-fpm.d/www.conf"
+  }
+  
+   provisioner "file" {
+    source = "files/nginx.conf"
+    destination = "/etc/nginx/nginx.conf"
+  }
 
-  {
-    "type": "file",
-    "source": "files/nginx.conf",
-    "destination": "/etc/nginx/nginx.conf"
-  },
-  {
-    "type": "file",
-    "source": "files/mariadb",
-    "destination": "/tmp/mariadb"
-  },
+   provisioner "file" {
+    source = "files/application.conf"
+    destination = "/etc/nginx/conf.d/app.conf"
+  }
 
-  {
-    "type": "file",
-    "source": "files/user_management.sql",
-    "destination": "/tmp/user_management.sql"
-  },
-  {
-    "type": "script",
-    "inline": [ "mariadb < /tmp/mariadb" ]
-  },
+   provisioner "file" {
+    source = "files/nginx.conf"
+    destination = "/etc/nginx/nginx.conf"
+  }
+  
+   provisioner "file" {
+    source = "files/mariadb"
+    destination = "/tmp/mariadb"
+   }
+   provisioner "file" {
+    source = "files/user_management.sql"
+    destination = "/tmp/user_management.sql"
+  }
+    provisioner "shell" {
+    inline = [ "mariadb < /tmp/mariadb" ]
+  }
 
-  {
-    "type": "script",
-    "inline": [ "mariadb < /tmp/user_management.sql" ]
+   provisioner "shell" {
+    inline = [ "mariadb < /tmp/user_management.sql" ]
   } 
-]
 }
-
-
-
+#
+#
