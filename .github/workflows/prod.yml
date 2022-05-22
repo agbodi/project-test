@@ -1,20 +1,11 @@
 name: "Terraform Deployment"
 on:
-  # Manual trigger
+  workflow_dispatch:
   workflow_run:
     workflows: [AWS AMI using Packer Config]
     branches: [main]
-    types: 
+    types:
       - completed
-  workflow_dispatch:
-  push:
-    paths:
-      - '*/**'
-  pull_request:
-    branches: [ main ]
-defaults:
-  run:
-    shell: bash
 jobs:
   on-success:
   terraform_test:

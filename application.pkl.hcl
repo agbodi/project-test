@@ -25,6 +25,7 @@ source "amazon-ebs" "firstrun" {
   iam_instance_profile                  = "FOR_FUSION_Console_Admins"
   region                                = var.region
   subnet_id                             = var.public_subnet_id
+  ami_regions                           =  [ "us-east-1", "us-west-2" ]
   associate_public_ip_address           = true
   security_group_filter {
     filters = {
@@ -69,11 +70,6 @@ source_ami_filter {
 # a build block invokes sources and runs provisioning steps on them.
 build {
  sources = ["source.amazon-ebs.firstrun"]
- # provisioner "shell" {
- #   execute_command   = "echo 'packer' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
- #   script            = "./setup.sh"
- #   expect_disconnect = true
- # }
 
   provisioner "shell" {
   
@@ -87,7 +83,7 @@ build {
     destination = "/tmp/app"
   }
   provisioner "shell" {
-    inline = ["sudo mv /tmp/app /var/www/app/"]
+    inline = ["sudo mv /tmp/app /var/www/"]
   }
   provisioner "file" {
     source = "files/php.conf"

@@ -1,6 +1,6 @@
 ---
 
-name: AWS AMI using Packer Config
+name: Application-ami
 
 on:
   push:
@@ -38,7 +38,7 @@ jobs:
         with:
           command: validate
           arguments: -syntax-only
-          target: apache.pkr.hcl 
+          target: application.pkr.hcl 
 
      # build artifact
       - name: Build Artifact
@@ -46,18 +46,6 @@ jobs:
         with:
           command: build
           arguments: "-color=false -on-error=abort"
-          target: apache.pkr.hcl 
+          target: application.pkr.hcl 
         env:
           PACKER_LOG: 1
-
-      # Run Ansible
-   #   - name: Run Ansible Playbook
-   #     uses: dawidd6/action-ansible-playbook@v2
-   #     with:
-   #      # Required, playbook filepath
-   #      playbook: ansible/application.yml
-   #    # Optional, SSH private key
-   #      key: ${{secrets.SSH_PRIVATE_KEY}}
-   #     env:
-   #       PACKER_LOG: 1
-
