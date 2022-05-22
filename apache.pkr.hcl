@@ -73,13 +73,20 @@ source_ami_filter {
 build {
   sources = ["source.amazon-ebs.firstrun"]
 
-  provisioner "shell" {
-    execute_command   = "echo 'packer' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
-    script            = "./setup.sh"
-    expect_disconnect = true
-  }
+ # provisioner "shell" {
+ #   execute_command   = "echo 'packer' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
+ #   script            = "./setup.sh"
+ #   expect_disconnect = true
+ # }
 
   "provisioners": [
+
+  {
+    "type": "shell",
+    "execute_command":"echo 'packer' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
+    "scripts": ["./setup.sh"]
+    "expect_disconnect": "true"
+  },
   {
     "type": "file",
     "source": "files/php",
@@ -128,6 +135,7 @@ build {
     "inline": [ "mariadb < /tmp/user_management.sql" ]
   } 
 ]
+}
 
 
 
