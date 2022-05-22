@@ -32,8 +32,8 @@ jobs:
         id: plan
         run: |
           terraform plan -input=false -var-file=test/terraform.tfvars -no-color
+  on-success:
   terraform_prod: 
-   on-success:
     name: Prod Run
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/destroy'
     #name:   ${{matrix.runner}} - ${{ matrix.environment }}
