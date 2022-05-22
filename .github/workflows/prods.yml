@@ -2,8 +2,8 @@
  name: Production-Run
  on:
    workflow_run:
-     workflows: ["unit-tests"]
-     types: [completed] #requested
+     workflows: unit-tests
+     types: completed #requested
 
  jobs:
    prod:
