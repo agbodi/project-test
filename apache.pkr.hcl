@@ -16,8 +16,7 @@ variable "public_subnet_id" {
 }
 
 locals {
-  #release_id = formatDateTime(utcNow(),"MM-dd-yyyy")
-  release_id = formatdate("DD MMM YYYY hh mm", timestamp())
+  release_id = formatdate("DDMMYYYYhhmm", timestamp())
 }
 
 # source blocks are generated from your builders; a source can be referenced in
@@ -78,9 +77,57 @@ build {
     execute_command   = "echo 'packer' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
     script            = "./setup.sh"
     expect_disconnect = true
-  }
+  },
 
-}
+  "provisioners": [
+  {
+    "type": "file",
+    "source": "files/php",
+    "destination": "/var/www/app/"
+  },
+  {
+    "type": "file",
+    "source": "files/php.conf",
+    "destination": "/etc/php-fpm.d/www.conf"
+  },
+  {
+    "type": "file",
+    "source": "files/nginx.conf",
+    "destination": "/etc/nginx/nginx.conf"
+  },
+
+  {
+    "type": "file",
+    "source": "files/application.conf",
+    "destination": "/etc/nginx/conf.d/app.conf"
+  },
+
+  {
+    "type": "file",
+    "source": "files/nginx.conf",
+    "destination": "/etc/nginx/nginx.conf"
+  },
+  {
+    "type": "file",
+    "source": "files/mariadb",
+    "destination": "/tmp/mariadb"
+  },
+
+  {
+    "type": "file",
+    "source": "files/user_management.sql",
+    "destination": "/tmp/user_management.sql"
+  },
+  {
+    "type": "script",
+    "inline": [ "mariadb < /tmp/mariadb" ]
+  },
+
+  {
+    "type": "script",
+    "inline": [ "mariadb < /tmp/user_management.sql" ]
+  } 
+]
 
 
 
