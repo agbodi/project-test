@@ -129,7 +129,7 @@ build {
   }
 
    provisioner "shell" {
-    inline = [ "sudo mariadb < /tmp/user_management.sql" ]
+    inline = [ "sudo mariadb user_inventory < /tmp/user_management.sql" ]
   }
 
   provisioner "shell" {
