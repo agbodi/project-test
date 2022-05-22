@@ -84,7 +84,7 @@ build {
 
   provisioner "file" {
     source = "files/php"
-    destination = "/var/www/app/"
+    destination = "/var/www/app"
   }
   provisioner "file" {
     source = "files/php.conf"
