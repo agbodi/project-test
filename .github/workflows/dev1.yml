@@ -9,8 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
        - run: echo "First workflow was a success"
-
-   prod:
+  prod:
     runs-on: ubuntu-latest
     steps:
        - run: echo "Second workflow was a success"
