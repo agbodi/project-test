@@ -5,23 +5,7 @@ sudo amazon-linux-extras enable nginx1.12
 
 sudo yum install wget nginx net-tools php php-common php-cli php-gd php-curl php-mysql php-fpm -y
 
-#sudo cp files/php.conf /etc/php-fpm.d/www.conf
-
-sudo chown -R root.nginx /var/lib/php
-
-sudo systemctl enable php-frm && sudo systemctl start pho-frm
-
-#sudo cp files/nginx.conf /etc/nginx/nginx.conf
-
 sudo mkdir -p /var/www/app
-
-#sudo cp -r files/php /var/www/app
-
-sudo chown -R root.nginx /var/www/app
-
-#sudo cp -r files/application.conf /etc/nginx/conf.d/app.conf
-
-sudo systemctl enable nginx && sudo systemctl start nginx
 
 sudo amazon-linux-extras enable mariadb10.5
 

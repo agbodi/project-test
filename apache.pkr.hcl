@@ -87,32 +87,39 @@ build {
     destination = "/tmp/app"
   }
   provisioner "shell" {
-    inline = ["mv /tmp/app /var/www/app/"]
+    inline = ["sudo mv /tmp/app /var/www/app/"]
   }
   provisioner "file" {
     source = "files/php.conf"
-    destination = "/etc/php-fpm.d/www.conf"
+    destination = "/tmp/php.conf"
+  }
+
+  provisioner "shell" {
+    inline = ["sudo mv /tmp/php.conf /etc/php-fpm.d/www.conf"]
   }
   
    provisioner "file" {
     source = "files/nginx.conf"
-    destination = "/etc/nginx/nginx.conf"
+    destination = "/tmp/nginx.conf"
   }
 
+   provisioner "shell" {
+    inline = ["sudo mv /tmp/nginx.conf /etc/nginx/nginx.conf"]
+  }
    provisioner "file" {
     source = "files/application.conf"
     destination = "/etc/nginx/conf.d/app.conf"
   }
 
-   provisioner "file" {
-    source = "files/nginx.conf"
-    destination = "/etc/nginx/nginx.conf"
+  provisioner "shell" {
+    inline = ["sudo mv /tmp/app.conf /etc/nginx/conf.d/app.conf"]
   }
-  
+
    provisioner "file" {
     source = "files/mariadb"
     destination = "/tmp/mariadb"
    }
+
    provisioner "file" {
     source = "files/user_management.sql"
     destination = "/tmp/user_management.sql"
@@ -123,6 +130,13 @@ build {
 
    provisioner "shell" {
     inline = [ "mariadb < /tmp/user_management.sql" ]
+  }
+
+  provisioner "shell" {
+    inline = [ "sudo chown -R root.nginx /var/lib/php  /var/www/app" ]
+  }
+ provisioner "shell" {
+    inline = [ "sudo systemctl enable php-frm && sudo systemctl start php-frm && sudo systemctl enable nginx && sudo systemctl start nginx" ]
   } 
 }
 #
