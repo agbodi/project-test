@@ -1,6 +1,6 @@
  on:
    workflow_run:
-     workflows: ["umit-tests"]
+     workflows: ["unit-tests"]
      types: [completed] #requested
 
  jobs:
