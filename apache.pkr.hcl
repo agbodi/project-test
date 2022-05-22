@@ -77,7 +77,7 @@ build {
     execute_command   = "echo 'packer' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
     script            = "./setup.sh"
     expect_disconnect = true
-  },
+  }
 
   "provisioners": [
   {
