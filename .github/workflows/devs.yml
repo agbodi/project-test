@@ -9,5 +9,5 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-       - run: echo "First workflow was a success"
+       - run: echos "First workflow was a success"
 
