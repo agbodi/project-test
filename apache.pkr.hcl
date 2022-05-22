@@ -87,8 +87,7 @@ build {
     destination = "/tmp/app"
   }
   provisioner "shell" {
-    source = "/tmp/php"
-    destination = "/var/www/app"
+    inline = ["mv /tmp/php /var/www/app/"]
   }
   provisioner "file" {
     source = "files/php.conf"
